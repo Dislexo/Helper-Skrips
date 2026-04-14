@@ -24,7 +24,7 @@ rm $fileout
 touch $fileout
 while IFS= read -r line
 do
-	printf '[%s]\n' "$line" >&2
+	# printf '[%s]\n' "$line" >&2  #debug tool
 	if [ $i == 5 ]; then
 		printf '%s\n' "$N" >> $fileout
 	else
