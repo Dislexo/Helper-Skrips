@@ -24,7 +24,6 @@ rm $fileout
 touch $fileout
 while IFS= read -r line
 do
-	# printf '[%s]\n' "$line" >&2  #debug tool
 	if [ $i == 5 ]; then
 		printf '%s\n' "$N" >> $fileout
 	else
@@ -38,10 +37,10 @@ Ni=$NA
 Prelines=0
 while IFS= read -r line
 do
-	if [[ "$line" == *"Configuration num"* ]]; then
+	if [[ "$line" == *"Configuration num."* ]]; then
 		Ni=$(($Ni+1))
-		printf '%s\n' "Configuration num.      ${Ni}" >> $fileout
-	elif [ "$Ni" == "$N0" ]; then 
+		printf '%s\n' "     Configuration num.      ${Ni}" >> $fileout
+	elif [ "$Ni" == "$NA" ]; then
 		Prelines=$(($Prelines+1))
 	else
 		printf '%s\n' "$line" >> $fileout
