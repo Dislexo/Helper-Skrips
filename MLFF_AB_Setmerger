@@ -6,7 +6,7 @@
 Fileend="ML_ABN"
 Prefix="Xtalopt"
 
-if [ -f "$Prefix 1.$Fileend" ] && [ -f "${Prefix}2.$Fileend" ]; then
+if [ -f "${Prefix}1.$Fileend" ] && [ -f "${Prefix}2.$Fileend" ]; then
 echo "merging ${Prefix}1.$Fileend ${Prefix}2.$Fileend"
 else
 echo "Are you shure you are in the right folder?"
