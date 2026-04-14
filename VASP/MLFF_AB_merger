@@ -34,7 +34,6 @@ do
 done < $fileIN_A
 
 echo '**************************************************' >> $fileout
-exit
 Ni=$NA
 Prelines=0
 while IFS= read -r line
