@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#WARNING:   This script is inificent AF!
+#           DONT USE ON VERY LARGE SETS!
+
+Fileend="ML_ABN"
+Prefix="Xtalopt"
+
+if [ -f "$Prefix 1.$Fileend" ] && [ -f "${Prefix}2.$Fileend" ]; then
+echo "merging ${Prefix}1.$Fileend ${Prefix}2.$Fileend"
+else
+echo "Are you shure you are in the right folder?"
+exit
+fi
+
+i=3
+bash MLFF_AB_merger.sh USPEX1.ML_ABN USPEX2.ML_ABN SUMM.ML_ABN > log
+
+while [ -f "$Prefix$i.$Fileend" ]; do
+echo "adding $Prefix$i.$Fileend"
+cp SUMM.ML_ABN coppy
+bash MLFF_AB_merger.sh coppy $Prefix$i.$Fileend SUMM.$Fileend >> log
+i=$((i+1))
+done
+echo "all fines finished"
+rm coppy
