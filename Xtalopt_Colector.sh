@@ -20,8 +20,9 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-echo "colecting: $filetype ranked by Etalpy per Atom"
+echo "colecting: $filetype ranked by Entropy per Atom"
 
+mkdir -p Structures
 while IFS= read -r results; do
     Number=$(echo "$results" | awk '{print $1}')
     Comp=$(echo "$results" | awk '{print $4}')
@@ -38,16 +39,15 @@ while IFS= read -r results; do
 
     if [[ $singlefile == TRUE ]]; then fileout=ranked.POSCARS
     elif [[ $compsplit == TRUE ]]; then
-    mkdir -p Structures
     fileout=./Structures/$Comp.ranked.POSCARS
-    echo '%s\n' $results >> "./Structurs/$Comp.Results.txt"
-    else mkdir -p $Comp
-    fileout="$Comp/Structure$Number.vasp"
-    echo '%s\n' $results >> "./$Comp/Results.txt"
+    echo $results >> "./Structures/$Comp.Results.txt"
+    else mkdir -p Structures/$Comp
+    fileout="./Structures/$Comp/Structure$Number.vasp"
+    echo $results >> "./Structures/$Comp/Results.txt"
     fi
     #coppy poscars with header
     {
-    echo "# $Number EntalpyAtom: $E_a_A Hull: $above_hull SG: $SG"
+    echo "# $Number Energy/Atom: $E_a_A Hull: $above_hull SG: $SG"
     tail -n +2 $filein
     } >> $fileout
 
